@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Toggable from "./components/Toggable";
 
 const App = () => {
     const [blogs, setBlogs] = useState([])
@@ -12,6 +13,7 @@ const App = () => {
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
     const [notification, setNotification] = useState(null)
+    const [render, setRender] = useState(false)
 
 
   //Gets all blogs at component render
@@ -19,7 +21,7 @@ const App = () => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
     )  
-  }, [blogs])
+  }, [render])
 
     useEffect(() => {
        const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -29,6 +31,8 @@ const App = () => {
             blogService.setToken(user.token)
         }
     }, [])
+
+    const blogFormRef = React.createRef()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -75,6 +79,7 @@ const App = () => {
     }
 
     const addBlog = async (event) => {
+        blogFormRef.current.toggleVisibility()
         event.preventDefault()
         const blogObject = {
             title: title,
@@ -83,18 +88,19 @@ const App = () => {
             likes: 0
         }
         const result = await blogService.create(blogObject)
-        console.log(result)
         blogs.concat(result)
         setNotification(`new Blog: ${title} by ${author} at ${url} successfully added to list.`)
         setTimeout(() => {
             setNotification(null)
         }, 5000)
+        setRender(!render)
         setTitle('')
         setAuthor('')
         setUrl('')
     }
 
-    const noteForm = () => (
+    const blogForm = () => (
+        <Toggable label={'add blog'} ref={blogFormRef}>
         <form onSubmit={addBlog}>
             <div>
                 Title: <input type='text' value={title} name='Title' onChange={({target}) => setTitle(target.value)}/>
@@ -107,6 +113,7 @@ const App = () => {
             </div>
             <button type={'submit'}>add Blog</button>
         </form>
+</Toggable>
     )
 
 
@@ -124,7 +131,7 @@ const App = () => {
           <button onClick={() => logout()}>logout</button>
           <br/>
           <h2>Add blogs to list:</h2>
-          {noteForm()}
+          {blogForm()}
           <br/>
           <h2>Blogs:</h2>
           {blogs.map(blog =>
