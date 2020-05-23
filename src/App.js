@@ -8,6 +8,9 @@ const App = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
 
 
   //Gets all blogs at component render
@@ -15,7 +18,7 @@ const App = () => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
     )  
-  }, [])
+  }, [blogs])
 
     useEffect(() => {
        const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -24,7 +27,7 @@ const App = () => {
             setUser(user)
             blogService.setToken(user.token)
         }
-    }, [user])
+    }, [])
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -53,10 +56,55 @@ const App = () => {
         <button type={'submit'}>login</button>
       </form>
   )
+    //logout function that clears local storage and sets user to null
     const logout = () => {
         window.localStorage.clear()
         setUser(null)
     }
+
+    const addBlog = async (event) => {
+        event.preventDefault()
+        const blogObject = {
+            title: title,
+            author: author,
+            url: url,
+            likes: 0
+        }
+        const result = await blogService.create(blogObject)
+        console.log(result)
+        blogs.concat(result)
+        setTitle('')
+        setAuthor('')
+        setUrl('')
+    }
+
+    const noteForm = () => (
+        <form onSubmit={addBlog}>
+            <div>
+                Title: <input type='text' value={title} name='Title' onChange={({target}) => setTitle(target.value)}/>
+            </div>
+            <div>
+                Author: <input type={'text'} value={author} name={'Author'} onChange={({target}) => {setAuthor(target.value)}}/>
+            </div>
+            <div>
+                Url: <input type={'text'} value={url} name={'Url'} onChange={({target}) => {setUrl(target.value)}}/>
+            </div>
+            <button type={'submit'}>add Blog</button>
+        </form>
+    )
+
+    /*
+    const blogSchema = mongoose.Schema({
+    title: String,
+    author: String,
+    url: String,
+    likes: Number,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+})
+*/
 
   return (
     <div>
@@ -67,6 +115,9 @@ const App = () => {
           <p>{user.name} logged in</p>
           <br/>
           <button onClick={() => logout()}>logout</button>
+          <br/>
+          <h2>Add blogs to list:</h2>
+          {noteForm()}
           <br/>
           <h2>Blogs:</h2>
           {blogs.map(blog =>
