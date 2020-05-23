@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
+import blogServices from '../services/blogs'
 
 
 const BlogToggle = ({blog}) => {
     const [visible, setVisible] = useState(false)
+    const [likes, setLikes] = useState(blog.likes)
     const visionShow = {display: visible ? '' : 'none'}
     const visionHide = {display: visible ? 'none' : ''}
     const buttonText = () => {
@@ -28,6 +30,21 @@ const BlogToggle = ({blog}) => {
         setVisible(!visible)
     }
 
+    const handleLikes = async () => {
+        setLikes(likes + 1)
+        let updateObject = {
+            title: blog.title,
+            author: blog.author,
+            url: blog.url,
+            likes: likes + 1
+        }
+        const propObj = {
+            updateObject: updateObject,
+            id: blog.id
+        }
+        await blogServices.update(propObj)
+    }
+
     return (
         <div style={blogStyle}>
             <div style={visionHide}>
@@ -36,7 +53,7 @@ const BlogToggle = ({blog}) => {
             <div style={visionShow}>
                 <div>{blog.title} <button onClick={toggleVisibility}>{buttonText()}</button></div>
                 <div>{blog.url}</div>
-                <div>{blog.likes} <button>like</button></div>
+                <div>{likes} <button onClick={handleLikes}>like</button></div>
                 <div>{blog.author}</div>
             </div>
         </div>
