@@ -11,6 +11,7 @@ const App = () => {
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     const [url, setUrl] = useState('')
+    const [notification, setNotification] = useState(null)
 
 
   //Gets all blogs at component render
@@ -37,10 +38,17 @@ const App = () => {
           window.localStorage.setItem('loggedUser', JSON.stringify(user))
           blogService.setToken(user.token)
           setUser(user)
+          setNotification(`User: ${username} successfuly logged in`)
+          setTimeout(() => {
+              setNotification(null)
+          }, 5000)
           setUsername('')
           setPassword('')
       } catch (exception) {
-        console.log(exception)
+        setNotification(`UserName or Password are Incorrect. Access denied!`)
+        setTimeout(() => {
+            setNotification(null)
+        }, 5000)
       }
   }
 
@@ -59,6 +67,10 @@ const App = () => {
     //logout function that clears local storage and sets user to null
     const logout = () => {
         window.localStorage.clear()
+        setNotification(`User: ${user.username} logged off`)
+        setTimeout(() => {
+            setNotification(null)
+        }, 5000)
         setUser(null)
     }
 
@@ -73,6 +85,10 @@ const App = () => {
         const result = await blogService.create(blogObject)
         console.log(result)
         blogs.concat(result)
+        setNotification(`new Blog: ${title} by ${author} at ${url} successfully added to list.`)
+        setTimeout(() => {
+            setNotification(null)
+        }, 5000)
         setTitle('')
         setAuthor('')
         setUrl('')
@@ -93,21 +109,12 @@ const App = () => {
         </form>
     )
 
-    /*
-    const blogSchema = mongoose.Schema({
-    title: String,
-    author: String,
-    url: String,
-    likes: Number,
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-})
-*/
 
   return (
     <div>
+        <div className={'notification'}>
+        {notification !== null && <h2>{notification}</h2>}
+        </div>
       <h1>Login:</h1>
       {user === null ? loginForm()
           :
