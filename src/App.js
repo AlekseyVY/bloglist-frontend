@@ -14,6 +14,16 @@ const App = () => {
     const [render, setRender] = useState(false)
 
 
+    const compare = (a, b) => {
+        if(a.likes < b.likes){
+            return 1
+        } else if(a.likes > b.likes){
+            return -1
+        } else {
+            return 0
+        }
+    }
+
   //Gets all blogs at component render
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -111,7 +121,7 @@ const App = () => {
           {blogForm()}
           <br/>
           <h2>Blogs:</h2>
-          {blogs.map(blog =>
+          {blogs.sort(compare).map(blog =>
               <BlogToggle key={blog.id} blog={blog} />
           )}
       </div>
