@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import blogServices from '../services/blogs'
 
 
-const BlogToggle = ({blog}) => {
+const BlogToggle = ({blog, render}) => {
     const [visible, setVisible] = useState(false)
     const [likes, setLikes] = useState(blog.likes)
     const visionShow = {display: visible ? '' : 'none'}
@@ -45,6 +45,12 @@ const BlogToggle = ({blog}) => {
         await blogServices.update(propObj)
     }
 
+    const handleDelete = async (event) => {
+        event.preventDefault()
+        await blogServices.remove(blog.id)
+        render()
+    }
+
     return (
         <div style={blogStyle}>
             <div style={visionHide}>
@@ -55,6 +61,9 @@ const BlogToggle = ({blog}) => {
                 <div>{blog.url}</div>
                 <div>{likes} <button onClick={handleLikes}>like</button></div>
                 <div>{blog.author}</div>
+                <div>
+                    <button onClick={handleDelete}>remove</button>
+                </div>
             </div>
         </div>
     )

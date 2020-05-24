@@ -103,6 +103,9 @@ const App = () => {
         </Toggable>
     )
 
+    const handleRerenderAfterDelete = () => {
+        setRender(!render)
+    }
 
   return (
     <div>
@@ -122,7 +125,7 @@ const App = () => {
           <br/>
           <h2>Blogs:</h2>
           {blogs.sort(compare).map(blog =>
-              <BlogToggle key={blog.id} blog={blog} />
+              <BlogToggle key={blog.id} blog={blog} render={handleRerenderAfterDelete}/>
           )}
       </div>
       }

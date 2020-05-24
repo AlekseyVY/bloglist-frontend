@@ -29,4 +29,13 @@ const update = async (props) => {
   await axios.put(updateUrl, props.updateObject, config)
 }
 
-export default { getAll, setToken, create, update }
+const remove = async (props) => {
+  const config = {
+    headers: { Authorization: token }
+  }
+  console.log(props)
+  const updateUrl = `${baseUrl}/${props}`
+  await axios.delete(updateUrl, config)
+}
+
+export default { getAll, setToken, create, update, remove }
