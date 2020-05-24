@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import blogServices from '../services/blogs'
+import PropTypes from 'prop-types'
 
 
 const BlogToggle = ({blog, render}) => {
@@ -67,6 +68,10 @@ const BlogToggle = ({blog, render}) => {
             </div>
         </div>
     )
+}
+BlogToggle.propTypes = {
+    blog: PropTypes.object.isRequired,
+    render: PropTypes.func.isRequired
 }
 
 export default BlogToggle
