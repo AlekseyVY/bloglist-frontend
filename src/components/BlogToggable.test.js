@@ -40,5 +40,11 @@ test('blog shows when view button clicked', () => {
 
     const div = component.container.querySelector('.invisibleBlogPart')
     expect(div).not.toHaveStyle('display: none')
+
+    const mock = jest.fn()
+    const like = component.getByText('like')
+    fireEvent.click(like)
+    fireEvent.click(like)
 })
+
 
