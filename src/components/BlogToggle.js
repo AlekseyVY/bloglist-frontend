@@ -8,16 +8,6 @@ const BlogToggle = ({blog, render}) => {
     const [likes, setLikes] = useState(blog.likes)
     const visionShow = {display: visible ? '' : 'none'}
     const visionHide = {display: visible ? 'none' : ''}
-    const buttonText = () => {
-        if(visible){
-            return (
-                <div>hide</div>
-            )
-        }
-        return (
-            <div>view</div>
-        )
-    }
 
     const blogStyle = {
         paddingTop: 10,
@@ -55,10 +45,10 @@ const BlogToggle = ({blog, render}) => {
     return (
         <div style={blogStyle}>
             <div style={visionHide} className={'visibleBlogPart'}>
-                {blog.title} by {blog.author} <button onClick={toggleVisibility}>{buttonText()}</button>
+                {blog.title} by {blog.author} <button onClick={toggleVisibility}>{'view'}</button>
             </div>
             <div style={visionShow} className={'invisibleBlogPart'}>
-                <div>{blog.title} <button onClick={toggleVisibility}>{buttonText()}</button></div>
+                <div>{blog.title} <button onClick={toggleVisibility}>{'hide'}</button></div>
                 <div>{blog.url}</div>
                 <div>{likes} <button onClick={handleLikes}>like</button></div>
                 <div>{blog.author}</div>
