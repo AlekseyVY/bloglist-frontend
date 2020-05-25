@@ -54,10 +54,10 @@ const BlogToggle = ({blog, render}) => {
 
     return (
         <div style={blogStyle}>
-            <div style={visionHide}>
+            <div style={visionHide} className={'visibleBlogPart'}>
                 {blog.title} by {blog.author} <button onClick={toggleVisibility}>{buttonText()}</button>
             </div>
-            <div style={visionShow}>
+            <div style={visionShow} className={'invisibleBlogPart'}>
                 <div>{blog.title} <button onClick={toggleVisibility}>{buttonText()}</button></div>
                 <div>{blog.url}</div>
                 <div>{likes} <button onClick={handleLikes}>like</button></div>
