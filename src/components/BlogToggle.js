@@ -53,7 +53,7 @@ const BlogToggle = ({blog, render}) => {
                 <div>{likes} <button id={'like'} onClick={handleLikes}>like</button></div>
                 <div>{blog.author}</div>
                 <div>
-                    <button onClick={handleDelete}>remove</button>
+                    <button id={'remove'} onClick={handleDelete}>remove</button>
                 </div>
             </div>
         </div>
