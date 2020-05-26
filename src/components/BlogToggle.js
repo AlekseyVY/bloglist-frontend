@@ -45,12 +45,12 @@ const BlogToggle = ({blog, render}) => {
     return (
         <div style={blogStyle}>
             <div style={visionHide} className={'visibleBlogPart'}>
-                {blog.title} by {blog.author} <button onClick={toggleVisibility}>{'view'}</button>
+                {blog.title} by {blog.author} <button id={'view'} onClick={toggleVisibility}>{'view'}</button>
             </div>
             <div style={visionShow} className={'invisibleBlogPart'}>
                 <div>{blog.title} <button onClick={toggleVisibility}>{'hide'}</button></div>
                 <div>{blog.url}</div>
-                <div>{likes} <button onClick={handleLikes}>like</button></div>
+                <div>{likes} <button id={'like'} onClick={handleLikes}>like</button></div>
                 <div>{blog.author}</div>
                 <div>
                     <button onClick={handleDelete}>remove</button>

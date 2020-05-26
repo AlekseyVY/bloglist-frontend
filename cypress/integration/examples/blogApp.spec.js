@@ -44,6 +44,17 @@ describe('Blog app', function() {
                 cy.get('#submit_blog').click()
                 cy.contains('TEST_TITLE by TEST_AUTHOR')
             })
+
+            it('A user can like blog', function() {
+                cy.get('#add_blog').click()
+                cy.get('#title').type('TEST_TITLE')
+                cy.get('#author').type('TEST_AUTHOR')
+                cy.get('#url').type('TEST_URL')
+                cy.get('#submit_blog').click()
+                cy.get('#view').click()
+                cy.get('#like').click()
+                cy.contains('1')
+            })
         })
     })
 })
