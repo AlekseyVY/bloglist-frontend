@@ -68,12 +68,12 @@ const App = () => {
   const loginForm = () => (
       <form onSubmit={handleLogin}>
         <div>
-          Username: <input type={'text'} value={username} name={'Username'} onChange={({target}) => setUsername(target.value)}/>
+          Username: <input id={'username'} type={'text'} value={username} name={'Username'} onChange={({target}) => setUsername(target.value)}/>
         </div>
         <div>
-          Password: <input type={'text'} value={password} name={'Password'} onChange={({target}) => setPassword(target.value)}/>
+          Password: <input id={'password'} type={'text'} value={password} name={'Password'} onChange={({target}) => setPassword(target.value)}/>
         </div>
-        <button type={'submit'}>login</button>
+        <button id={'login_button'} type={'submit'}>login</button>
       </form>
   )
     //logout function that clears local storage and sets user to null
