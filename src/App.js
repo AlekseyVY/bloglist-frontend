@@ -4,9 +4,12 @@ import loginService from './services/login'
 import Toggable from "./components/Toggable";
 import BlogForm from './components/BlogForm'
 import BlogToggle from "./components/BlogToggle";
+import { init } from "./reducers/blogsReducer";
+import {useDispatch, useSelector} from "react-redux";
 
 const App = () => {
-    const [blogs, setBlogs] = useState([])
+    const dispatch = useDispatch()
+    const blogs = undefined
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
@@ -26,9 +29,7 @@ const App = () => {
 
   //Gets all blogs at component render
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+      dispatch(init())
   }, [render])
 
     useEffect(() => {
