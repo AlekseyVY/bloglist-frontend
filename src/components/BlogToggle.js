@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import blogServices from '../services/blogs'
 import PropTypes from 'prop-types'
 import {useDispatch} from "react-redux";
 import {like, remove} from "../reducers/blogsReducer";

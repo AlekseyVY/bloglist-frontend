@@ -18,7 +18,7 @@ const Login = () => {
             dispatch(user(userLogged))
             blogService.setToken(userLogged.token)
         }
-    }, [])
+    }, [dispatch])
 
 
     const handleLogin = async (event) => {

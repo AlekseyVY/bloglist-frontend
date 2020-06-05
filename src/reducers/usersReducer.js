@@ -1,7 +1,9 @@
+import userService from '../services/users'
 
 const initialState = {
     username: '',
     password: '',
+    users: null,
     user: null
 }
 
@@ -18,6 +20,9 @@ const reducer = (state = initialState, action) => {
             return state
         case 'USER_LOGOUT':
             state.user = action.data
+            return state
+        case 'ALL_USERS':
+            state.users = action.data
             return state
         default:
             return state
@@ -47,6 +52,16 @@ export const passwordX = (props) => {
         dispatch({
             type: 'PASSWORD',
             data: props
+        })
+    }
+}
+
+export const allUsers = () => {
+    return async dispatch => {
+        const users = await userService.getUsers()
+        dispatch({
+            type: 'ALL_USERS',
+            data: users
         })
     }
 }

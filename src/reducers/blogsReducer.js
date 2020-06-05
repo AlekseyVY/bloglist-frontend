@@ -1,5 +1,4 @@
 import blogService from '../services/blogs'
-import blogServices from "../services/blogs";
 
 
 const reducer = (state = []  , action) => {
@@ -55,7 +54,7 @@ export const like = (props) => {
 
 export const remove = (props) => {
     return async dispatch => {
-        await blogServices.remove(props)
+        await blogService.remove(props)
         dispatch({
             type: 'DELETE'
         })
