@@ -4,7 +4,6 @@ import BlogForm from './components/BlogForm'
 import BlogToggle from "./components/BlogToggle";
 import { init } from "./reducers/blogsReducer";
 import {useDispatch, useSelector} from "react-redux";
-import AddBlog from "./components/AddBlog";
 import  Logout from "./components/Logout";
 import Login from "./components/Login";
 
@@ -34,7 +33,7 @@ const App = () => {
 
     const blogForm = () => (
         <Toggable label={'add blog'} ref={blogFormRef}>
-            <BlogForm createBlog={<AddBlog />}/>
+            <BlogForm />
         </Toggable>
     )
 
