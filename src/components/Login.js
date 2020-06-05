@@ -37,21 +37,25 @@ const Login = () => {
             }
         }, 0)
     }
+    const style = {
+        display: 'inline',
+        margin: 20
+    }
 
 //login form for logging in user with username and password
     return (
-        <form onSubmit={handleLogin}>
-            <div>
-                Username: <input id={'username'} type={'text'} name={'usernames'} onChange={({target}) => {
+        <form onSubmit={handleLogin} style={style}>
+            <>
+                Username: <input style={{marginRight: 10}} id={'username'} type={'text'} name={'usernames'} onChange={({target}) => {
                 dispatch(usernameX(target.value))
             }}/>
-            </div>
-            <div>
-                Password: <input id={'password'} type={'text'} name={'passwords'} onChange={({target}) => {
+            </>
+            <>
+                Password: <input  id={'password'} type={'text'} name={'passwords'} onChange={({target}) => {
                 dispatch(passwordX(target.value))
             }}/>
-            </div>
-            <button id={'login_button'} type={'submit'}>login</button>
+            </>
+            <button style={{marginLeft: 20}} id={'login_button'} type={'submit'}>login</button>
         </form>
     )
 }

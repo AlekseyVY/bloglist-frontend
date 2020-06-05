@@ -19,15 +19,15 @@ const ConditionalLogin = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <>
             {users === null ? <Login />
             :
-                <div>
-                    <p>{users.username} logged in</p>
+                <>
+                    {users.username} logged in
                     <Logout />
-                </div>
+                </>
             }
-        </div>
+        </>
     )
 }
 
