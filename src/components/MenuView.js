@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom'
 import BlogList from "./BlogList";
 import UserList from "./UserList";
 import ConditionalLogin from "./ConditionalLogin";
+import UserView from "./UserView";
+import BlogView from "./BlogView";
 
 const MenuView = () => {
     const style = {
@@ -16,7 +18,6 @@ const MenuView = () => {
     }
 
     return (
-        <div>
             <Router>
                 <ul style={ulStyle}>
                         <li style={style}><Link to={'/userView'}>Users</Link></li>
@@ -26,9 +27,11 @@ const MenuView = () => {
                 <Switch>
                     <Route path={'/userView'}><UserList /></Route>
                     <Route path={'/blogView'}><BlogList /></Route>
+                    <Route path={'/blogs/:id'}><BlogView /></Route>
+                    <Route exact path={'/users/:id'}><UserView /></Route>
+                    <Route path={'/'}><h1>Blog App</h1></Route>
                 </Switch>
             </Router>
-        </div>
     )
 }
 

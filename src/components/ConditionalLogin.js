@@ -1,22 +1,13 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Login from "./Login";
 import Logout from "./Logout";
-import {useDispatch, useSelector} from "react-redux";
-import {allUsers} from "../reducers/usersReducer";
-import {init} from "../reducers/blogsReducer";
+import {useSelector} from "react-redux";
+
 
 
 const ConditionalLogin = () => {
     const users = useSelector(state => state.users.user)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(allUsers())
-    }, [dispatch])
-
-    useEffect(() => {
-        dispatch(init())
-    }, [dispatch])
 
     return (
         <>

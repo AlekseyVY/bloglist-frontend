@@ -17,6 +17,16 @@ const reducer = (state = []  , action) => {
             return state.map(b => b.id !== id ? b : changedBlog)
         case 'DELETE':
             return state.map(blog => blog)
+        case 'COMMENT':
+            const idComment = action.id
+            const blog = state.find(blog => blog.id === idComment)
+            if(!blog.comment) {
+                blog.comment = []
+                blog.comment.push(action.comment)
+            } else {
+                blog.comment.push(action.comment)
+            }
+            return state
         default:
             return state
     }
@@ -57,6 +67,17 @@ export const remove = (props) => {
         await blogService.remove(props)
         dispatch({
             type: 'DELETE'
+        })
+    }
+}
+
+export const comment = (props) => {
+    return async dispatch => {
+        //await blogService.comment(props)
+        dispatch({
+            type: 'COMMENT',
+            comment: props.comment,
+            id: props.id
         })
     }
 }
