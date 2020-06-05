@@ -1,11 +1,11 @@
 import blogService from '../services/blogs'
 
-
-
-const blogsReducer = (state = []  , action) => {
+const reducer = (state = []  , action) => {
     switch (action.type) {
         case 'INIT':
             return action.data
+        default:
+            return state
     }
 }
 
@@ -19,4 +19,4 @@ export const init = () => {
     }
 }
 
-export default blogsReducer
+export default reducer

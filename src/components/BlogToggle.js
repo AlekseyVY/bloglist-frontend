@@ -3,7 +3,7 @@ import blogServices from '../services/blogs'
 import PropTypes from 'prop-types'
 
 
-const BlogToggle = ({blog, render}) => {
+const BlogToggle = ({blog}) => {
     const [visible, setVisible] = useState(false)
     const [likes, setLikes] = useState(blog.likes)
     const visionShow = {display: visible ? '' : 'none'}
@@ -39,7 +39,6 @@ const BlogToggle = ({blog, render}) => {
     const handleDelete = async (event) => {
         event.preventDefault()
         await blogServices.remove(blog.id)
-        render()
     }
 
     return (
@@ -61,7 +60,6 @@ const BlogToggle = ({blog, render}) => {
 }
 BlogToggle.propTypes = {
     blog: PropTypes.object.isRequired,
-    render: PropTypes.func.isRequired
 }
 
 export default BlogToggle
