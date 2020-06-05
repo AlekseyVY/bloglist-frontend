@@ -1,13 +1,15 @@
 import React, {useState} from 'react'
 import blogServices from '../services/blogs'
 import PropTypes from 'prop-types'
+import {useDispatch} from "react-redux";
+import {like, remove} from "../reducers/blogsReducer";
 
 
 const BlogToggle = ({blog}) => {
     const [visible, setVisible] = useState(false)
-    const [likes, setLikes] = useState(blog.likes)
     const visionShow = {display: visible ? '' : 'none'}
     const visionHide = {display: visible ? 'none' : ''}
+    const dispatch = useDispatch()
 
     const blogStyle = {
         paddingTop: 10,
@@ -21,25 +23,12 @@ const BlogToggle = ({blog}) => {
         setVisible(!visible)
     }
 
-    const handleLikes = async () => {
-        setLikes(likes + 1)
-        let updateObject = {
-            title: blog.title,
-            author: blog.author,
-            url: blog.url,
-            likes: likes + 1
-        }
-        const propObj = {
-            updateObject: updateObject,
-            id: blog.id
-        }
-        await blogServices.update(propObj)
-    }
 
     const handleDelete = async (event) => {
         event.preventDefault()
-        await blogServices.remove(blog.id)
+        dispatch(remove(blog.id))
     }
+
 
     return (
         <div style={blogStyle}>
@@ -49,7 +38,7 @@ const BlogToggle = ({blog}) => {
             <div style={visionShow} className={'invisibleBlogPart'}>
                 <div>{blog.title} <button onClick={toggleVisibility}>{'hide'}</button></div>
                 <div>{blog.url}</div>
-                <div>{likes} <button id={'like'} onClick={handleLikes}>like</button></div>
+                <div>{blog.likes} <button id={'like'} onClick={() => dispatch(like(blog))}>like</button></div>
                 <div>{blog.author}</div>
                 <div>
                     <button id={'remove'} onClick={handleDelete}>remove</button>

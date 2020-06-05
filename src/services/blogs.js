@@ -25,15 +25,18 @@ const update = async (props) => {
   const config = {
     headers: { Authorization: token}
   }
+  const updatedObject = {
+    ...props,
+    likes: props.likes + 1
+  }
   const updateUrl = `${baseUrl}/${props.id}`
-  await axios.put(updateUrl, props.updateObject, config)
+  await axios.put(updateUrl, updatedObject, config)
 }
 
 const remove = async (props) => {
   const config = {
     headers: { Authorization: token }
   }
-  console.log(props)
   const updateUrl = `${baseUrl}/${props}`
   await axios.delete(updateUrl, config)
 }
