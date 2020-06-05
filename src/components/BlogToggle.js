@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch} from "react-redux";
 import {like, remove} from "../reducers/blogsReducer";
+import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom'
+import BlogView from "./BlogView";
 
 
 const BlogToggle = ({blog}) => {
@@ -28,10 +30,13 @@ const BlogToggle = ({blog}) => {
         dispatch(remove(blog.id))
     }
 
-
+/*
     return (
         <div style={blogStyle}>
             <div style={visionHide} className={'visibleBlogPart'}>
+                <Router>
+                    <Link to={`/blogs/${blog.id}`}>{blog.name}</Link>
+                </Router>
                 {blog.title} by {blog.author} <button id={'view'} onClick={toggleVisibility}>{'view'}</button>
             </div>
             <div style={visionShow} className={'invisibleBlogPart'}>
@@ -45,7 +50,21 @@ const BlogToggle = ({blog}) => {
             </div>
         </div>
     )
+    */
+    return (
+        <div>
+        <Router>
+            <ul>
+                <Link to={`/blogs/${blog.id}`}><li>{blog.title}</li></Link>
+            </ul>
+            <Switch>
+                <Route path={'/blogs/:id'}><BlogView /></Route>
+            </Switch>
+        </Router>
+        </div>
+    )
 }
+
 BlogToggle.propTypes = {
     blog: PropTypes.object.isRequired,
 }

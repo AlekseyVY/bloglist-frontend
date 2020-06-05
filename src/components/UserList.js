@@ -1,16 +1,12 @@
-import React, {useEffect} from 'react'
-import {useDispatch, useSelector} from "react-redux";
-import {allUsers} from "../reducers/usersReducer";
+import React from 'react'
+import { useSelector} from "react-redux";
 import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom'
 import UserView from "./UserView";
 
 
 const UserList = () => {
-    const dispatch = useDispatch()
     const users = useSelector(state => state.users.users)
-    useEffect(() => {
-        dispatch(allUsers())
-    }, [dispatch])
+
 
     return (
         <div>
