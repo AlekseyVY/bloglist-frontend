@@ -3,6 +3,10 @@ import {useSelector} from "react-redux";
 import BlogToggle from "./BlogToggle";
 import Toggable from "./Toggable";
 import BlogForm from "./BlogForm";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableRow from "@material-ui/core/TableRow";
 
 
 
@@ -32,10 +36,15 @@ const BlogList = () => {
 
     return (
         <div>
-          <h2>Add blogs to list:</h2>
+                <br />
           {blogForm()}
-          <h2>Blogs:</h2>
-          {blogs.sort(compare).map(blog => <BlogToggle key={blog.id} blog={blog}/>)}
+          <TableContainer>
+              <Table>
+                  <TableBody>
+          {blogs.sort(compare).map(blog => <TableRow hover={true} key={blog.id}><BlogToggle key={blog.id} blog={blog}/></TableRow>)}
+                  </TableBody>
+              </Table>
+        </TableContainer>
         </div>
 )}
 

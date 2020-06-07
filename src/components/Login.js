@@ -4,6 +4,8 @@ import blogService from "../services/blogs";
 import loginService from "../services/login";
 import {notify} from "../reducers/notificationReducer";
 import {useDispatch, useSelector} from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 
 const Login = () => {
@@ -46,16 +48,16 @@ const Login = () => {
     return (
         <form onSubmit={handleLogin} style={style}>
             <>
-                Username: <input style={{marginRight: 10}} id={'username'} type={'text'} name={'usernames'} onChange={({target}) => {
+                <TextField label={'username'} style={{marginRight: 10}} id={'username'} type={'text'} name={'usernames'} onChange={({target}) => {
                 dispatch(usernameX(target.value))
             }}/>
             </>
             <>
-                Password: <input  id={'password'} type={'text'} name={'passwords'} onChange={({target}) => {
+                <TextField label={'password'}  id={'password'} type={'text'} name={'passwords'} onChange={({target}) => {
                 dispatch(passwordX(target.value))
             }}/>
             </>
-            <button style={{marginLeft: 20}} id={'login_button'} type={'submit'}>login</button>
+            <Button variant={'contained'} color={'primary'} style={{marginLeft: 20}} id={'login_button'} type={'submit'}>login</Button>
         </form>
     )
 }

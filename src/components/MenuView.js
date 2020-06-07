@@ -5,6 +5,10 @@ import UserList from "./UserList";
 import ConditionalLogin from "./ConditionalLogin";
 import UserView from "./UserView";
 import BlogView from "./BlogView";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
 const MenuView = () => {
     const style = {
@@ -12,18 +16,19 @@ const MenuView = () => {
         marginLeft: 10,
     }
     const ulStyle = {
-        backgroundColor: 'grey',
         paddingTop: 5,
         paddingBottom: 5
     }
 
     return (
             <Router>
-                <ul style={ulStyle}>
-                        <li style={style}><Link to={'/userView'}>Users</Link></li>
-                        <li style={style}><Link to={'/blogView'}>Blogs</Link></li>
-                        <li style={style}><ConditionalLogin /></li>
-                </ul>
+                <AppBar position={'static'}>
+                    <Toolbar>
+                        <Button color={'inherit'} component={Link} to={'/userView'}>Users</Button>
+                        <Button color={'inherit'}component={Link} to={'/blogView'}>Blogs</Button>
+                        <ConditionalLogin />
+                    </Toolbar>
+                </AppBar>
                 <Switch>
                     <Route path={'/userView'}><UserList /></Route>
                     <Route path={'/blogView'}><BlogList /></Route>

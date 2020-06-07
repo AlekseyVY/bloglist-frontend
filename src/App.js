@@ -2,16 +2,19 @@ import React from 'react'
 import Notification from "./components/Notification";
 import MenuView from "./components/MenuView";
 import Init from './components/Init'
+import Container from "@material-ui/core/Container";
 
 const App = () => {
 
 
   return (
-    <div>
-        <Init />
-        <Notification />
-        <MenuView />
-    </div>
+      <Container>
+          <div>
+              <Init />
+              <Notification />
+              <MenuView />
+          </div>
+      </Container>
   )
 }
 
